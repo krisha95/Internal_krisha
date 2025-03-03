@@ -1,0 +1,39 @@
+//
+// _rightbar.scss
+//
+
+// Main Nav
+.rightbar {
+     top: 0;
+     right: 0;
+     bottom: 0;
+     margin-left: 0;
+     position: fixed;
+     transition: all 0.3s ease-in-out;
+     width: 300px !important;
+     opacity: 1 !important;
+     box-shadow: $box-shadow !important;
+}
+
+@include media-breakpoint-up(lg) {
+     .wrapper {
+          margin-right: 300px;
+     }
+
+     .rightbar-toggle {
+          .offcanvas-backdrop {
+               display: none !important;
+          }
+     }
+
+     .rightbar-toggle {
+
+          .wrapper {
+               margin-right: 0;
+          }
+
+          .rightbar {
+               margin-right: -300px !important;
+          }
+     }
+}
