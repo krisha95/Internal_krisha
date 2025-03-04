@@ -63,4 +63,3 @@ export type SocialLinkType = {
 
   url: string;
 };
-

@@ -1,88 +1,73 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import user1 from "@/assets/images/users/avatar-1.jpg";
 
-const UserDropdown: React.FC<UserDropdownProps> = ({ userName }) => {
+import { useState } from "react";
+import { Dropdown } from "react-bootstrap";
+import Image from "next/image";
+import Link from "next/link";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import avatar1 from "@/assets/images/users/avatar-1.jpg";
+
+const UserDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
-    <div className="dropdown topbar-item" ref={dropdownRef}>
-      <button
-        type="button"
-        className="topbar-button"
+    <Dropdown show={isOpen} onToggle={(isOpen) => setIsOpen(isOpen)}>
+      <Dropdown.Toggle
+        as="a"
         id="page-header-user-dropdown"
-        aria-haspopup="true"
-        aria-expanded={isOpen}
+        className="topbar-button d-flex align-items-center"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <a
-          type="button"
-          className="topbar-button"
-          id="page-header-user-dropdown"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span className="d-flex align-items-center">
-            <img
-              className="rounded-circle img-thumbnail shadow"
-              width="42"
-              src={user1.src}
-              alt="avatar-3"
-            />
-          </span>
-        </a>
-      </button>
+        <Image
+          className="rounded-circle img-thumbnail shadow"
+          width={42}
+          height={42}
+          src={avatar1.src}
+          alt="User Avatar"
+        />
+      </Dropdown.Toggle>
 
-      {isOpen && (
-        <div className="dropdown-menu dropdown-menu-end show">
-          <h6 className="dropdown-header">Welcome {userName}! </h6>
-          <h6 className="dropdown-header">Welcome {"Gaston"}! </h6>
-
-          <a className="dropdown-item" href="pages-profile.html">
-            <i className="bx bx-user-circle text-muted fs-18 align-middle me-1"></i>
-            <span className="align-middle">Profile</span>
-          </a>
-          <a className="dropdown-item" href="apps-chat.html">
-            <i className="bx bx-message-dots text-muted fs-18 align-middle me-1"></i>
-            <span className="align-middle">Messages</span>
-          </a>
-          <a className="dropdown-item" href="pages-pricing.html">
-            <i className="bx bx-wallet text-muted fs-18 align-middle me-1"></i>
-            <span className="align-middle">Pricing</span>
-          </a>
-          <a className="dropdown-item" href="pages-faqs.html">
-            <i className="bx bx-help-circle text-muted fs-18 align-middle me-1"></i>
-            <span className="align-middle">Help</span>
-          </a>
-          <a className="dropdown-item" href="auth-lock-screen.html">
-            <i className="bx bx-lock text-muted fs-18 align-middle me-1"></i>
-            <span className="align-middle">Lock screen</span>
-          </a>
-
-          <div className="dropdown-divider my-1"></div>
-
-          <a className="dropdown-item text-danger" href="auth-signin.html">
-            <i className="bx bx-log-out fs-18 align-middle me-1"></i>
-            <span className="align-middle">Logout</span>
-          </a>
-        </div>
-      )}
-    </div>
+      <Dropdown.Menu align="end">
+        <Dropdown.Header>Welcome!</Dropdown.Header>
+        <Dropdown.Item as={Link} href="/pages-profile">
+          <Icon
+            icon="bx:user-circle"
+            className="text-muted fs-18 align-middle me-1"
+          />
+          Profile
+        </Dropdown.Item>
+        <Dropdown.Item as={Link} href="/apps-chat">
+          <Icon
+            icon="bx:message-dots"
+            className="text-muted fs-18 align-middle me-1"
+          />
+          Messages
+        </Dropdown.Item>
+        <Dropdown.Item as={Link} href="/pages-pricing">
+          <Icon
+            icon="bx:wallet"
+            className="text-muted fs-18 align-middle me-1"
+          />
+          Pricing
+        </Dropdown.Item>
+        <Dropdown.Item as={Link} href="/pages-faqs">
+          <Icon
+            icon="bx:help-circle"
+            className="text-muted fs-18 align-middle me-1"
+          />
+          Help
+        </Dropdown.Item>
+        <Dropdown.Item as={Link} href="/auth-lock-screen">
+          <Icon icon="bx:lock" className="text-muted fs-18 align-middle me-1" />
+          Lock screen
+        </Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item as={Link} href="/auth-signin" className="text-danger">
+          <Icon icon="bx:log-out" className="fs-18 align-middle me-1" />
+          Logout
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

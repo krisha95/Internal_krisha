@@ -3,25 +3,29 @@ import { ReactNode } from "react";
 
 import LeftSideBar from "./components/LeftSideBar";
 import TopBar from "./components/TopBar";
-// import { useLayoutContext } from "@/context/useLayoutContext";
+import { useLayoutContext } from "@/context/useLayoutContext";
+import { Offcanvas } from "react-bootstrap";
 
 const VerticalLayout = ({ children }: { children: ReactNode }) => {
-  // const { theme, changeTheme } = useLayoutContext();
-
-  // const toggleTheme = () => {
-  //   if (theme == "dark") {
-  //     changeTheme("light");
-  //     return;
-  //   }
-  //   changeTheme("dark");
-  //   return;
-  // };
+  const { theme, mainMenu, toggleMobileMenu } = useLayoutContext();
 
   return (
     <>
       <div className="wrapper">
         <TopBar />
-        <LeftSideBar />
+
+        {mainMenu.size === "hidden" ? (
+          <>
+            <Offcanvas
+              show={mainMenu.isMobileMenuOpen}
+              onHide={() => toggleMobileMenu(!mainMenu.isMobileMenuOpen)}
+            >
+              <LeftSideBar />
+            </Offcanvas>
+          </>
+        ) : (
+          <LeftSideBar />
+        )}
 
         <div className="page-content">
           {/* <button onClick={toggleTheme}>{theme}</button> */}

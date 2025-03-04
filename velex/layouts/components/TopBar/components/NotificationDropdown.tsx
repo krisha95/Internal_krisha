@@ -1,7 +1,12 @@
 "use client";
-import { useState } from "react";
 import { Dropdown, Badge, Image, Button } from "react-bootstrap";
 import { Icon } from "@iconify/react";
+import avatar1 from "@/assets/images/users/avatar-1.jpg";
+import avatar3 from "@/assets/images/users/avatar-3.jpg";
+import avatar5 from "@/assets/images/users/avatar-5.jpg";
+import { StaticImageData } from "next/image";
+import SimpleBar from "simplebar-react";
+import { FaArrowRight } from "react-icons/fa";
 
 interface Notification {
   id: number;
@@ -10,6 +15,7 @@ interface Notification {
   message: string;
   avatar?: string;
   icon?: string;
+  image?: StaticImageData;
 }
 
 const notifications: Notification[] = [
@@ -18,7 +24,7 @@ const notifications: Notification[] = [
     type: "comment",
     sender: "Josephine Thompson",
     message: "Wow 😍! This admin looks good and awesome design",
-    // avatar: "/images/avatar-1.jpg",
+    image: avatar1,
   },
   {
     id: 2,
@@ -26,13 +32,14 @@ const notifications: Notification[] = [
     sender: "Donoghue Susan",
     message: "Hi, How are you? What about our next meeting?",
     icon: "iconamoon:comment-dots-duotone",
+    image: avatar3,
   },
   {
     id: 3,
     type: "comment",
     sender: "Jacob Gines",
     message: "Answered to your comment on the cash flow forecast's graph 🔔.",
-    // avatar: "/images/avatar-3.jpg",
+    image: avatar3,
   },
   {
     id: 4,
@@ -40,89 +47,82 @@ const notifications: Notification[] = [
     sender: "System",
     message: "You have received 20 new messages in the conversation",
     icon: "iconamoon:comment-dots-duotone",
+    image: avatar5,
   },
   {
     id: 5,
     type: "comment",
     sender: "Shawn Bunch",
     message: "Commented on Admin",
-    // avatar: "/images/avatar-5.jpg",
+    image: avatar5,
   },
 ];
 
 const NotificationDropdown = () => {
-  const [notifCount, setNotifCount] = useState(notifications.length);
-
   return (
-    <div className="dropdown topbar-item">
-      <Button
+    <Dropdown className="topbar-item">
+      <Dropdown.Toggle
         type="button"
-        className="topbar-button position-relative"
-        id="page-header-notifications-dropdown"
-        data-bs-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
+        className="position-relative topbar-button"
       >
         <Icon icon="solar:bell-bing-outline" className="fs-4 align-middle" />
-        {notifCount > 0 && (
+        {notifications.length > 0 && (
           <Badge
             bg="danger"
-            className="position-absolute topbar-badge fs-10 translate-middle rounded-pill"
+            className="position-absolute top-0 start-100 translate-middle rounded-pill"
           >
-            {notifCount}
-            <Badge className="visually-hidden">unread messages </Badge>
+            {notifications.length}
           </Badge>
         )}
-      </Button>
+      </Dropdown.Toggle>
 
-      <div
-        className="dropdown-menu py-0 dropdown-lg dropdown-menu-end"
-        aria-labelledby="page-header-notifications-dropdown"
-      >
-        <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
+      <Dropdown.Menu className="dropdown-lg dropdown-menu-end">
+        <div className="p-3 border-bottom border-dashed">
           <div className="d-flex justify-content-between align-items-center">
             <h6 className="m-0 fs-16 fw-semibold">Notifications</h6>
-            <button
-              className="btn btn-link text-decoration-underline p-0 text-dark fs-14"
-              onClick={() => setNotifCount(0)}
+            <Button
+              variant="link"
+              className="p-0 text-dark fs-14 text-decoration-underline"
             >
               <small>Clear All</small>
-            </button>
+            </Button>
           </div>
         </div>
 
-        <div className="overflow-auto" style={{ maxHeight: "280px" }}>
-          {notifications.map((notif) => (
+        <SimpleBar className="overflow-auto" style={{ maxHeight: "280px" }}>
+          {notifications.map((notification) => (
             <Dropdown.Item
-              key={notif.id}
+              key={notification.id}
               className="py-3 border-bottom d-flex align-items-center"
             >
-              {notif.avatar ? (
+              {notification.image ? (
                 <Image
-                  src={notif.avatar}
-                  alt={notif.sender}
-                  className="me-2 avatar-sm rounded-circle"
+                  src={notification.image.src}
+                  alt={notification.sender}
+                  roundedCircle
+                  className="me-2 avatar-sm"
                 />
               ) : (
                 <span className="avatar-title bg-soft-info text-info fs-20 rounded-circle me-2">
-                  <Icon icon={notif.icon || "mdi:account"} />
+                  <Icon icon={notification.icon || "mdi:account"} />
                 </span>
               )}
               <div className="flex-grow-1">
-                <p className="mb-0 fw-semibold">{notif.sender}</p>
-                <p className="mb-0 text-wrap">{notif.message}</p>
+                <p className="mb-0 fw-semibold">{notification.sender}</p>
+                <p className="mb-0 text-wrap">{notification.message}</p>
               </div>
             </Dropdown.Item>
           ))}
-        </div>
+        </SimpleBar>
 
         <div className="text-center py-3">
-          <button className="btn btn-primary btn-sm">
+          <Button variant="primary" size="sm">
             View All Notifications
-          </button>
+            <FaArrowRight className="ms-1" />
+          </Button>
         </div>
-      </div>
-    </div>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

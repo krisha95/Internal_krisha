@@ -3,7 +3,7 @@ import {
   findAllParent,
   findMenuItem,
   getMenuItemFromURL,
-} from "@/helpers/Menu";
+} from "@/helpers/menu";
 import { MenuItemType, SubMenus } from "@/types/menu";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import clsx from "clsx";

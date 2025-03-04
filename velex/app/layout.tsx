@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 // import "bootstrap/scss/bootstrap.scss";
+import 'simplebar-react/dist/simplebar.min.css';
 import "@/assets/scss/app.scss";
 import AppWrappersProvider from "@/components/AppWrappersProvider";
 

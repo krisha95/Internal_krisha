@@ -1,3 +1,4 @@
+"use client";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
 import SearchBar from "./components/SearchBar";
@@ -6,8 +7,20 @@ import NotificationDropdown from "./components/NotificationDropdown";
 import Setting from "./components/Setting";
 import UserProfile from "./components/UserProfile";
 import Theme from "./components/Theme";
+import { useLayoutContext } from "@/context/useLayoutContext";
 
 const TopBar = () => {
+  const { mainMenu, changeMainMenuSize, toggleMobileMenu } = useLayoutContext();
+
+  const toggleMainMenu = () => {
+    if (mainMenu.size === "hidden") {
+      return toggleMobileMenu(!mainMenu.isMobileMenuOpen);
+    } else if (mainMenu.size === "default") {
+      return changeMainMenuSize("condensed");
+    }
+    return changeMainMenuSize("default");
+  };
+
   return (
     <>
       <header className="topbar">
@@ -15,7 +28,11 @@ const TopBar = () => {
           <div className="navbar-header">
             <div className="d-flex align-items-center">
               <div className="topbar-item">
-                <button type="button" className="button-toggle-menu me-2">
+                <button
+                  onClick={toggleMainMenu}
+                  type="button"
+                  className="button-toggle-menu me-2"
+                >
                   <Icon
                     icon="solar:hamburger-menu-broken"
                     className="fs-24 align-middle"
@@ -42,8 +59,6 @@ const TopBar = () => {
       </header>
     </>
   );
-
-
 };
 
 export default TopBar;

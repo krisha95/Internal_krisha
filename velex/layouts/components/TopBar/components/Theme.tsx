@@ -17,10 +17,9 @@ const Theme = () => {
         <button
           type="button"
           className="topbar-button"
-          id="light-dark-mode"
           onClick={() => toggleTheme()}
         >
-          <Icon icon="solar:moon-outline" className="fs-24 align-middle"></Icon>
+          <Icon icon="solar:moon-outline" className="fs-24 align-middle"/>
         </button>
       </div>
     </>

@@ -1,31 +1,11 @@
-import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 
-const SearchBar = ({ placeholder = "Search...", onSearch }: SearchBarProps) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (onSearch) {
-      onSearch(searchTerm);
-    }
-  };
-
+const SearchBar = () => {
   return (
-    <Form className="app-search d-none d-md-block me-2" onSubmit={handleSubmit}>
+    <Form className="app-search d-none d-md-block me-2">
       <div className="position-relative">
-        <Form.Control
-          type="search"
-          placeholder={placeholder}
-          autoComplete="off"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+        <Form.Control type="input" placeholder="Search..." />
 
         <Icon
           icon="solar:magnifer-linear"
