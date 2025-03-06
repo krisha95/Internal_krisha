@@ -8,11 +8,23 @@ import avatar7 from "@/assets/images/users/avatar-7.jpg";
 import img6 from "@/assets/images/small/img-6.jpg";
 import image3 from "@/assets/images/small/img-3.jpg";
 import image4 from "@/assets/images/small/img-4.jpg";
+import { useEffect, useState } from "react";
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ show, setShow }) => {
+  const [backdrop, setBackdrop] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBackdrop(window.innerWidth <= 1020);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <Offcanvas
-      backdrop={false}
+      backdrop={backdrop}
       show={show}
       onHide={() => setShow(false)}
       placement="end"
@@ -26,17 +38,18 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ show, setShow }) => {
           />
 
           <div className="p-3">
-            <h5 className="mb-3 text-muted fw-bold text-uppercase">
+            <h5 className="mb-3 fs-12 text-muted fw-bold text-uppercase">
               Activity Stream
             </h5>
             <div className="position-relative ms-2">
+              <span className="position-absolute start-0 top-0 border border-dashed h-100"></span>
               <div className="position-relative ps-3">
                 <div className="mb-4">
                   <span className="position-absolute start-0 avatar-xs text-bg-danger d-inline-flex align-items-center justify-content-center rounded-circle fs-16">
                     <Icon icon="iconamoon:folder-check-duotone" />
                   </span>
                   <div className="ms-2">
-                    <h5 className="mb-1 text-dark fw-semibold">
+                    <h5 className="mb-1 text-dark fw-semibold fs-14 lh-base">
                       Report-Fix / Update
                     </h5>
                     <p className="d-flex align-items-center">

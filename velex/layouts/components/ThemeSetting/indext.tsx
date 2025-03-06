@@ -51,9 +51,10 @@ const ThemeSettings: React.FC<ThemeSettingsProps> = ({ show, handleClose }) => {
               <Form.Check
                 key={item}
                 type="radio"
+                id={`theme-${item}`}
                 name="theme"
                 label={toSentenceCase(item)}
-                value={item}
+                value={item}  
                 checked={theme === item}
                 onChange={() => changeTheme(item)}
                 className={idx !== LayoutColors.length - 1 ? "mb-2" : ""}
@@ -67,6 +68,7 @@ const ThemeSettings: React.FC<ThemeSettingsProps> = ({ show, handleClose }) => {
               <Form.Check
                 key={item}
                 type="radio"
+                id={`topbarColor-${item}`}
                 name="topbarColor"
                 label={toSentenceCase(item)}
                 value={item}
@@ -83,6 +85,7 @@ const ThemeSettings: React.FC<ThemeSettingsProps> = ({ show, handleClose }) => {
               <Form.Check
                 key={item}
                 type="radio"
+                id={`menuColor-${item}`}
                 name="menuColor"
                 label={toSentenceCase(item)}
                 value={item}
@@ -99,6 +102,7 @@ const ThemeSettings: React.FC<ThemeSettingsProps> = ({ show, handleClose }) => {
               <Form.Check
                 key={size}
                 type="radio"
+                id={`mensize-${size}`}
                 name="mensize"
                 label={kebabToTitleCase(size)}
                 value={size}

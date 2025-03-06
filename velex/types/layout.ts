@@ -20,6 +20,7 @@ export type LayoutState = {
 
 export type LayoutOffcanvasStatesType = {
   showThemeCustomizer: boolean;
+  showActivitySidebar: boolean;
 };
 
 export type OffcanvasControlType = {
@@ -38,6 +39,7 @@ export type LayoutType = LayoutState & {
     isMobileMenuOpen: MainMenuType["isMobileMenuOpen"]
   ) => void;
   themeCustomizer: OffcanvasControlType;
+  activitySidebar: OffcanvasControlType;
   resetSettings: () => void;
 };
 

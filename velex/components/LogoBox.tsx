@@ -14,15 +14,15 @@ const LogoBox = () => {
           src={logoSm}
           className="logo-sm"
           alt="logo-dark"
-          height={24}
-          width={80}
+          height={26}
+          width={26}
         />
         <Image
           src={logoDark}
           className="logo-lg"
           alt="logo lg"
-          height={24}
-          width={80}
+          height={26}
+          width={101.26}
         />
       </Link>
       <Link href="/" className="logo-light">
@@ -30,15 +30,15 @@ const LogoBox = () => {
           src={logoSm}
           className="logo-sm"
           alt="Logo"
-          height={24}
-          width={80}
+          height={26}
+          width={26}
         />
         <Image
           src={logoLight}
           className="logo-lg"
           alt="logo-light"
-          height={24}
-          width={80}
+          height={26}
+          width={101.26}
         />
       </Link>
     </div>

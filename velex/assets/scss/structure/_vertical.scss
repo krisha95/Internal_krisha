@@ -50,36 +50,38 @@
           padding-bottom: $spacer;
           border-right: $card-border-width solid $main-nav-border-color;
           box-shadow: $box-shadow;
-          
+
 
           .scrollbar {
                height: calc(100% - $topbar-height);
           }
 
           .menu-arrow {
-               &::after {
-                    right: calc($main-nav-item-padding-x * 1);
-                    display: block;
-                    content: "\ea4a";
-                    font-family: boxicons;
+               position: relative;
+
+               svg {
+                    right: 0;
+                    top: -5px;
                     margin-left: auto;
                     position: absolute;
                     transition: transform 0.2s;
                     color: $main-nav-item-color;
-                    font-size: calc($main-nav-item-font-size * 1.25);
+                    width: calc($main-nav-item-font-size * 1.25);
+                    height: calc($main-nav-item-font-size * 1.25);
                     opacity: 0.6;
                }
 
-               &[aria-expanded="true"] {
-                    &::after {
-                         transform: rotate(-180deg);
-                         color: $main-nav-item-hover-color;
-                    }
+          }
 
-                    &::before {
-                         opacity: 1;
-                         color: $main-nav-item-hover-color;
-                    }
+          .nav-link[aria-expanded="true"] {
+               .menu-arrow svg {
+                    transform: rotate(-180deg);
+                    color: $main-nav-item-hover-color;
+               }
+
+               &::before {
+                    opacity: 1;
+                    color: $main-nav-item-hover-color;
                }
           }
 
@@ -155,7 +157,7 @@
                     padding-left: 5px;
 
                     .menu-arrow {
-                         &::after {
+                         svg {
                               right: 0;
                          }
                     }
@@ -279,7 +281,7 @@ html[data-menu-size="condensed"] {
                     justify-content: center;
 
                     .nav-text,
-                    &.menu-arrow::after {
+                    .menu-arrow {
                          display: none;
                     }
                }
@@ -390,7 +392,7 @@ html[data-menu-size="condensed"] {
 
                .sub-nav-item {
                     .menu-arrow {
-                         &::after {
+                         svg {
                               right: 10px;
                               transform: rotate(-90deg);
                          }
@@ -487,10 +489,8 @@ html[data-menu-size="sm-hover"] {
                          display: none;
                     }
 
-                    &.menu-arrow {
-                         &::after {
+                    .menu-arrow {
                               display: none;
-                         }
                     }
                }
 
@@ -599,12 +599,12 @@ html[data-menu-color="brand"] {
 // RTL
 [dir="rtl"] {
      .menu-arrow {
-          &::after {
+          svg {
                transform: rotate(180deg);
           }
 
           &[aria-expanded="true"] {
-               &::after {
+               svg {
                     transform: rotate(270deg);
                }
           }

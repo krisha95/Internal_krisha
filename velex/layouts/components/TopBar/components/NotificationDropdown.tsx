@@ -65,11 +65,11 @@ const NotificationDropdown = () => {
         type="button"
         className="position-relative topbar-button"
       >
-        <Icon icon="solar:bell-bing-outline" className="fs-4 align-middle" />
+        <Icon icon="solar:bell-bing-outline" className="fs-24 align-middle" />
         {notifications.length > 0 && (
           <Badge
             bg="danger"
-            className="position-absolute top-0 start-100 translate-middle rounded-pill"
+            className="position-absolute topbar-badge fs-10 translate-middle rounded-pill"
           >
             {notifications.length}
           </Badge>

@@ -1,11 +1,27 @@
+"use client";
+
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import RightSidebar from "../../RightSideBar/RigthSideBar";
+import { useLayoutContext } from "@/context/useLayoutContext";
 
 const Activity = () => {
-  const [show, setShow] = useState(true);
+  const { activitySidebar } = useLayoutContext();
 
-  const handleToggle = () => setShow((prev) => !prev);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1020 && activitySidebar.open) {
+        activitySidebar.toggle();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activitySidebar]);
+
+  const handleToggle = () => {
+    activitySidebar.toggle();
+  };
 
   return (
     <>
@@ -22,7 +38,10 @@ const Activity = () => {
         </button>
       </div>
 
-      <RightSidebar show={show} setShow={setShow} />
+      <RightSidebar
+        show={activitySidebar.open}
+        setShow={activitySidebar.toggle}
+      />
     </>
   );
 };

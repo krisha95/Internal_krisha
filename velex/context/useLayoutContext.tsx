@@ -52,6 +52,7 @@ const LayoutProvider = ({ children }: ChildrenType) => {
   const [offcanvasStates, setOffcanvasStates] =
     useState<LayoutOffcanvasStatesType>({
       showThemeCustomizer: false,
+      showActivitySidebar: true,
     });
 
   // update settings
@@ -120,6 +121,22 @@ const LayoutProvider = ({ children }: ChildrenType) => {
     toggle: toggleThemeCustomizer,
   };
 
+  const toggleActivitySidebar: OffcanvasControlType["toggle"] = () => {
+    offcanvasStates.showActivitySidebar
+      ? toggleDocumentAttribute("class", "rightbar-toggle")
+      : toggleDocumentAttribute("class", "rightbar-toggle", true);
+
+    setOffcanvasStates({
+      ...offcanvasStates,
+      showActivitySidebar: !offcanvasStates.showActivitySidebar,
+    });
+  };
+
+  const activitySidebar: LayoutType["activitySidebar"] = {
+    open: offcanvasStates.showActivitySidebar,
+    toggle: toggleActivitySidebar,
+  };
+
   const resetSettings = () => updateSettings(INIT_STATE);
 
   useEffect(() => {
@@ -127,11 +144,17 @@ const LayoutProvider = ({ children }: ChildrenType) => {
     toggleDocumentAttribute("data-menu-size", settings.mainMenu.size);
     toggleDocumentAttribute("data-menu-color", settings.mainMenu.color);
     toggleDocumentAttribute("data-topbar-color", settings.topBar.color);
+
+    // if (!activitySidebar.open) {
+    //   toggleDocumentAttribute("class", "rightbar-toggle");
+    // }
+
     return () => {
-      toggleDocumentAttribute("data-bs-theme", settings.theme,false);
-      toggleDocumentAttribute("data-menu-size", settings.mainMenu.size,false);
-      toggleDocumentAttribute("data-menu-color", settings.mainMenu.color,false);
-      toggleDocumentAttribute("data-topbar-color", settings.topBar.color,false);
+      toggleDocumentAttribute("data-bs-theme", settings.theme, true);
+      toggleDocumentAttribute("data-menu-size", settings.mainMenu.size, true);
+      toggleDocumentAttribute("data-menu-color", settings.mainMenu.color, true);
+      toggleDocumentAttribute("data-topbar-color", settings.topBar.color, true);
+      // toggleDocumentAttribute("class", "rightbar-toggle", true);
     };
   }, [settings]);
 
@@ -142,6 +165,7 @@ const LayoutProvider = ({ children }: ChildrenType) => {
           ...settings,
           settings,
           themeCustomizer,
+          activitySidebar,
           changeTheme,
           changeMainMenuSize,
           changeMainMenuColor,

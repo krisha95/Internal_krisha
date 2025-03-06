@@ -59,7 +59,9 @@ const MenuItemWithChildren = ({
         )}
         <span className="nav-text">{item.label}</span>
         {!item.badge ? (
-          <Icon icon="bx:chevron-down" className="menu-arrow ms-auto" />
+          <span className="menu-arrow ms-auto">
+            <Icon icon="bx:chevron-down" />
+          </span>
         ) : (
           <span
             className={`badge badge-pill text-end bg-${item.badge.variant}`}
@@ -230,10 +232,7 @@ const AppMenu = ({ menuItems }: AppMenuProps) => {
                     item={item}
                     toggleMenu={toggleMenu}
                     className="nav-item"
-                    linkClassName={clsx(
-                      "nav-link menu-arrow",
-                      getActiveClass(item)
-                    )}
+                    linkClassName={clsx("nav-link", getActiveClass(item))}
                     subMenuClassName="nav sub-navbar-nav"
                     activeMenuItems={activeMenuItems}
                   />

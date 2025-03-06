@@ -1,9 +1,10 @@
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 import ThemeSettings from "../../ThemeSetting/indext";
+import { useLayoutContext } from "@/context/useLayoutContext";
 
 const Setting: React.FC = () => {
-  const [showThemeSettings, setShowThemeSettings] = useState(false);
+  const { themeCustomizer } = useLayoutContext();
 
   return (
     <div>
@@ -12,14 +13,14 @@ const Setting: React.FC = () => {
           type="button"
           className="topbar-button"
           id="theme-settings-btn"
-          onClick={() => setShowThemeSettings(true)}
+          onClick={themeCustomizer.toggle}
         >
           <Icon icon="solar:settings-outline" className="fs-24 align-middle" />
         </button>
       </div>
       <ThemeSettings
-        show={showThemeSettings}
-        handleClose={() => setShowThemeSettings(false)}
+        show={themeCustomizer.open}
+        handleClose={themeCustomizer.toggle}
       />
     </div>
   );

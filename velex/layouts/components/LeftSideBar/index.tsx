@@ -9,7 +9,7 @@ import AppMenu from "@/layouts/components/LeftSideBar/components/AppMenu";
 import LogoBox from "@/components/LogoBox";
 import { useLayoutContext } from "@/context/useLayoutContext";
 
-const LeftSideBar = () => {          
+const LeftSideBar = () => {
   const menuItems = getMenuItems();
 
   const { mainMenu, changeMainMenuSize } = useLayoutContext();
