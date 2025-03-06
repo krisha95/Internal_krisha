@@ -14,7 +14,7 @@ const VerticalLayout = ({ children }: { children: ReactNode }) => {
       <div className="wrapper">
         <TopBar />
 
-        {mainMenu.size === "hidden" ?   (
+        {mainMenu.size === "hidden" ? (
           <>
             <Offcanvas
               show={mainMenu.isMobileMenuOpen}

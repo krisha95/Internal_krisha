@@ -10,7 +10,7 @@ export const MENU_ITEMS: MenuItemType[] = [
     key: "dashboard",
     label: "Dashboard",
     icon: "solar:widget-5-outline",
-    url: "/",
+    url: "/dashboard",
   },
 
   {
