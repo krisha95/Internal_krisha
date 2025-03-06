@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect } from "react";
-import RightSidebar from "../../RightSideBar/RigthSideBar";
+import RightSidebar from "../../RightSideBar";
 import { useLayoutContext } from "@/context/useLayoutContext";
 
 const Activity = () => {

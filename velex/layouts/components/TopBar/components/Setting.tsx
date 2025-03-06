@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
-import ThemeSettings from "../../ThemeSetting/indext";
+import ThemeSettings from "../../ThemeSettings/indext";
 import { useLayoutContext } from "@/context/useLayoutContext";
 
 const Setting: React.FC = () => {
