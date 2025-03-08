@@ -5,6 +5,8 @@ import LeftSideBar from "./components/LeftSideBar";
 import TopBar from "./components/TopBar";
 import { useLayoutContext } from "@/context/useLayoutContext";
 import { Offcanvas } from "react-bootstrap";
+import Footer from "./components/Footer/Footer";
+import SimpleBar from "simplebar-react";
 
 const VerticalLayout = ({ children }: { children: ReactNode }) => {
   const { theme, mainMenu, toggleMobileMenu } = useLayoutContext();
@@ -28,9 +30,13 @@ const VerticalLayout = ({ children }: { children: ReactNode }) => {
         )}
 
         <div className="page-content">
-          {/* <button onClick={toggleTheme}>{theme}</button> */}
-          <div className="container-fluid">{children}</div>
+          <div className="container-fluid">
+              {children}
+            {/* <SimpleBar className="scrollbar">
+              </SimpleBar> */}
+          </div>
         </div>
+        <Footer />
       </div>
     </>
   );

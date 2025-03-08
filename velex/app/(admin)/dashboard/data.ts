@@ -137,7 +137,7 @@ export const performanceChart: ApexOptions = {
   },
 };
 
-export const conversions = {
+export const conversions: ApexOptions = {
   chart: {
     height: 265,
     type: "radialBar",
@@ -156,9 +156,9 @@ export const conversions = {
           offsetY: 55,
           fontSize: "20px",
           color: undefined,
-          formatter: function (val: string) {
-            return val + "%";
-          },
+          // formatter: function (val: string) {
+          //   return val + "%";
+          // },
         },
       },
       track: {
@@ -169,7 +169,7 @@ export const conversions = {
   },
   fill: {
     gradient: {
-      enabled: true,
+      // enabled: true,
       shade: "dark",
       shadeIntensity: 0.2,
       inverseColors: false,
@@ -200,6 +200,34 @@ export const conversions = {
       right: 0,
       bottom: 0,
       left: 0,
+    },
+  },
+};
+
+export const worldMapOpts = {
+  zoomOnScroll: true,
+  zoomButtons: false,
+  markersSelectable: true,
+  markers: [
+    { name: "Canada", coords: [56.1304, -106.3468] },
+    { name: "Brazil", coords: [-14.235, -51.9253] },
+    { name: "Russia", coords: [61, 105] },
+    { name: "China", coords: [35.8617, 104.1954] },
+    { name: "United States", coords: [37.0902, -95.7129] },
+  ],
+  markerStyle: {
+    initial: { fill: "#017ccc" },
+    selected: { fill: "#22c55e" },
+  },
+  labels: {
+    markers: {
+      render: (marker: any) => marker.name,
+    },
+  },
+  regionStyle: {
+    initial: {
+      fill: "rgba(169,183,197, 0.3)",
+      fillOpacity: 1,
     },
   },
 };

@@ -1,12 +1,10 @@
 "use client";
+import CustomApexChart from "@/components/CustomApexChart";
 import React from "react";
 import { Alert, Button, Card, CardBody, Col, Row } from "react-bootstrap";
-import CustomApexChart from "@/components/CustomApexChart";
 import { conversions, performanceChart } from "../data";
-import ReactApexChart from "react-apexcharts";
-import RadialChart from "@/components/RadialChart";
 
-const Performance: React.FC = () => {
+const Performance = () => {
   return (
     <Col xxl={9}>
       <Card>
@@ -20,6 +18,7 @@ const Performance: React.FC = () => {
                     {["ALL", "1M", "6M", "1Y"].map((label, index) => (
                       <Button
                         key={index}
+                        className="me-1"
                         variant="outline-light"
                         size="sm"
                         active={label === "1Y"}
@@ -38,7 +37,7 @@ const Performance: React.FC = () => {
                 <div dir="ltr">
                   <CustomApexChart
                     type="line"
-                    height={286}
+                    height={270}
                     series={performanceChart.series}
                     options={performanceChart}
                   />
@@ -50,12 +49,13 @@ const Performance: React.FC = () => {
               <div className="p-3">
                 <h5 className="card-title">Conversions</h5>
 
-                <div id="conversions" className="apex-charts mb-2 mt-n2">
-                  <RadialChart
-                    series={[65.2]}
-                    labels={["Returning Customer"]}
-                  />
-                </div>
+                <CustomApexChart
+                  type="radialBar"
+                  height={265}
+                  series={conversions.series}
+                  options={conversions}
+                  className="apex-charts mb-2 mt-n2"
+                />
 
                 <Row className="text-center">
                   <Col xs={6}>
