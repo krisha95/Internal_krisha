@@ -17,7 +17,7 @@ export const MENU_ITEMS: MenuItemType[] = [
     key: "apps-chat",
     label: "Chat",
     icon: "solar:chat-round-outline",
-    url: "/   ",
+    url: "/apps/chat",
   },
   {
     key: "email",
