@@ -1,5 +1,6 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
+import SimpleBar from "simplebar-react";
 
 interface Group {
   id: number;
@@ -21,41 +22,43 @@ const groups: Group[] = [
 const GroupList = () => {
   return (
     <div id="group-list">
-      <div className="px-3 mb-3 chat-setting-height" data-simplebar>
-        <div className="d-flex align-items-center position-relative mb-3">
-          <a className="me-2 stretched-link rounded text-bg-primary avatar d-flex align-items-center justify-content-center fs-18">
-            <i className="bx bxs-user"></i>
-            <FaUser />
-          </a>
-          <div className="flex-grow-1">
-            <h5 className="my-0 fs-14">New Group</h5>
-          </div>
-        </div>
-        {groups.map((group) => (
-          <div
-            key={group.id}
-            className="d-flex mb-3 align-items-center position-relative"
-          >
-            <a
-              href="javascript:void(0);"
-              className="me-2 stretched-link rounded bg-soft-primary text-primary avatar d-flex align-items-center justify-content-center fs-18"
-            >
-              {group.shortName}
+      <SimpleBar className="scrollbar">
+        <div className="px-3 mb-3 chat-setting-height" data-simplebar>
+          <div className="d-flex align-items-center position-relative mb-3">
+            <a className="me-2 stretched-link rounded text-bg-primary avatar d-flex align-items-center justify-content-center fs-18">
+              <i className="bx bxs-user"></i>
+              <FaUser />
             </a>
-            <div className="flex-grow-1 ps-1 overflow-hidden">
-              {group.unreadCount && (
-                <div className="float-end">
-                  <span className="badge badge-outline-danger">
-                    +{group.unreadCount}
-                  </span>
-                </div>
-              )}
-
-              <h5 className="fs-14 m-0">{group.name}</h5>
+            <div className="flex-grow-1">
+              <h5 className="my-0 fs-14">New Group</h5>
             </div>
           </div>
-        ))}
-      </div>
+          {groups.map((group) => (
+            <div
+              key={group.id}
+              className="d-flex mb-3 align-items-center position-relative"
+            >
+              <a
+                href="javascript:void(0);"
+                className="me-2 stretched-link rounded bg-soft-primary text-primary avatar d-flex align-items-center justify-content-center fs-18"
+              >
+                {group.shortName}
+              </a>
+              <div className="flex-grow-1 ps-1 overflow-hidden">
+                {group.unreadCount && (
+                  <div className="float-end">
+                    <span className="badge badge-outline-danger">
+                      +{group.unreadCount}
+                    </span>
+                  </div>
+                )}
+
+                <h5 className="fs-14 m-0">{group.name}</h5>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SimpleBar>
     </div>
   );
 };

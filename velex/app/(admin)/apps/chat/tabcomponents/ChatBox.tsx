@@ -1,13 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Button,
-  Dropdown,
-  Form,
-  Image,
-  InputGroup,
-  Offcanvas,
-} from "react-bootstrap";
+import { Button, Dropdown, Form, Image, InputGroup } from "react-bootstrap";
 import avatar4 from "@/assets/images/users/avatar-4.jpg";
 import img1 from "@/assets/images/small/img-1.jpg";
 import img2 from "@/assets/images/small/img-2.jpg";
@@ -32,7 +25,6 @@ import { GrStatusInfo } from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CgMusic, CgProfile } from "react-icons/cg";
 import { CiImageOn, CiSearch } from "react-icons/ci";
-import ChatSideBar from "../components/ChatSideBar";
 
 interface Message {
   id: number;
@@ -40,6 +32,11 @@ interface Message {
   sender: "user" | "other";
   time: string;
   attachments?: StaticImageData[];
+}
+
+interface UserProfileProps {
+  isProfileOpen: boolean;
+  toggleProfileSidebar: () => void;
 }
 
 export const DropdownMenu = () => (
@@ -84,10 +81,15 @@ export const DropdownMenu = () => (
 
 const ChatBox = () => {
   const [newMessage, setNewMessage] = useState("");
-  const [isSidebarOpen, setSidebarOpen] = useState(false); // State to control sidebar visibility
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen); // Toggle the sidebar open/close
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleProfileSidebar = () => {
+    setProfileOpen(!isProfileOpen);
   };
 
   const [messages, setMessages] = useState<Message[]>([
@@ -163,13 +165,19 @@ const ChatBox = () => {
         >
           <LuMenu />
         </Button>
-        {isSidebarOpen && (
-          //   <Offcanvas show={Offcanvas} backdrop={true}>
-          //     <Offcanvas.Body>
+        {/* {isSidebarOpen ? (
+          <Offcanvas
+            show={isSidebarOpen}
+            onHide={toggleSidebar}
+            backdrop={true}
+          >
+            <Offcanvas.Body>
+              <ChatSideBar />
+            </Offcanvas.Body>
+          </Offcanvas>
+        ) : (
           <ChatSideBar />
-          //     </Offcanvas.Body>
-          //   </Offcanvas>
-        )}
+        )} */}
 
         <div className="d-flex align-items-center">
           <img
@@ -213,6 +221,7 @@ const ChatBox = () => {
                 data-bs-toggle="offcanvas"
                 href="#user-profile"
                 className="text-dark"
+                onClick={toggleProfileSidebar}
               >
                 <FiUser />
               </a>
@@ -256,8 +265,8 @@ const ChatBox = () => {
       </div>
 
       <div className="chat-box">
-        <SimpleBar className="scrollbar">
-          <ul className="chat-conversation-list p-3 chatbox-height">
+        <ul className="chat-conversation-list p-3 chatbox-height">
+          <SimpleBar className="scrollbar">
             {messages.map((message) => (
               <li
                 key={message.id}
@@ -303,8 +312,8 @@ const ChatBox = () => {
                 </div>
               </li>
             ))}
-          </ul>
-        </SimpleBar>
+          </SimpleBar>
+        </ul>
       </div>
       <div className="bg-light bg-opacity-50 p-2">
         <Form
@@ -342,8 +351,139 @@ const ChatBox = () => {
           </div>
         </Form>
       </div>
+
+      <UserProfile
+        isProfileOpen={isProfileOpen}
+        toggleProfileSidebar={toggleProfileSidebar}
+      />
     </div>
   );
 };
 
 export default ChatBox;
+
+export const UserProfile: React.FC<UserProfileProps> = ({
+  isProfileOpen,
+  toggleProfileSidebar,
+}) => {
+  return (
+    <div
+      className={`offcanvas offcanvas-end position-absolute shadow border-start ${
+        isProfileOpen ? "show" : ""
+      }`}
+      data-bs-scroll="true"
+      data-bs-backdrop="false"
+      tabIndex={-1}
+      id="user-profile"
+      aria-labelledby="user-profileLabel"
+      style={{ display: isProfileOpen ? "block" : "none" }}
+    >
+      <div className="offcanvas-header">
+        <h5
+          className="offcanvas-title text-truncate w-50"
+          id="user-profileLabel"
+        >
+          Profile
+        </h5>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+          onClick={toggleProfileSidebar}
+        ></button>
+      </div>
+      <div className="offcanvas-body p-0 h-100" data-simplebar>
+        <div className="p-3">
+          <div className="text-center">
+            <img
+              src={avatar4.src}
+              alt="shreyu"
+              className="img-thumbnail avatar-lg rounded-circle mb-1"
+            />
+            <h4>Gilbert Chicoine</h4>
+            <button className="btn btn-primary btn-sm mt-1">
+              <i className="bi bi-envelope me-1"></i>Send Email
+            </button>
+            <p className="text-muted mt-2 fs-14">
+              Last Interacted: <strong className="text-success">Online</strong>
+            </p>
+          </div>
+
+          <div className="mt-3">
+            <hr />
+
+            <p className="mt-3 mb-1">
+              <strong>
+                <i className="bi bi-phone"></i> Phone Number:
+              </strong>
+            </p>
+            <p>+1 456 9595 9594</p>
+
+            <p className="mt-3 mb-1">
+              <strong>
+                <i className="bi bi-geo-alt"></i> Location:
+              </strong>
+            </p>
+            <p>California, USA</p>
+
+            <p className="mt-3 mb-1">
+              <strong>
+                <i className="bi bi-globe"></i> Languages:
+              </strong>
+            </p>
+            <p>English, German, Spanish</p>
+
+            <p className="mt-3 mb-2">
+              <strong>
+                <i className="bi bi-people"></i> Groups:
+              </strong>
+            </p>
+            <p className="mb-0">
+              <span className="badge badge-soft-success p-1 fs-14 me-1">
+                Work
+              </span>
+              <span className="badge badge-soft-primary p-1 fs-14">
+                Friends
+              </span>
+            </p>
+          </div>
+
+          <h5 className="mt-3">
+            <a href="javascript:void(0);" className="my-0">
+              <span className="float-end">See All</span>
+              Shared Photoes
+            </a>
+          </h5>
+          <div className="row gx-1 pt-2">
+            <div className="col-4">
+              <a href="javascript:void(0);">
+                <img src={img1.src} alt="img-1" className="img-fluid rounded" />
+              </a>
+            </div>
+            <div className="col-4">
+              <a href="javascript:void(0);">
+                <img src={img2.src} alt="img-2" className="img-fluid rounded" />
+              </a>
+            </div>
+            <div className="col-4">
+              <div className="position-relative overflow-hidden rounded">
+                <a href="javascript:void(0);">
+                  <img
+                    src={img3.src}
+                    alt="img-3"
+                    className="img-fluid rounded"
+                  />
+                  <div className="bg-overlay bg-dark"></div>
+                  <h3 className="position-absolute top-50 start-50 translate-middle my-0 text-white">
+                    +3
+                  </h3>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

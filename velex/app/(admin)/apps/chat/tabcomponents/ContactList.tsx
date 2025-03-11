@@ -12,6 +12,7 @@ import avatar10 from "@/assets/images/users/avatar-10.jpg";
 import { StaticImageData } from "next/image";
 import { LuUsersRound } from "react-icons/lu";
 import { FiUserPlus } from "react-icons/fi";
+import SimpleBar from "simplebar-react";
 
 const ContactList = () => {
   interface Contact {
@@ -51,49 +52,51 @@ const ContactList = () => {
 
   return (
     <div id="contact-list">
-      <div className="px-3 mb-3 chat-setting-height" data-simplebar>
-        {contacts.map((contact) => (
-          <div
-            key={contact.id}
-            className="d-flex align-items-center position-relative py-2"
-          >
-            {contact.icon ? (
-              <a
-                href="#"
-                className="me-2 stretched-link rounded-circle text-bg-primary avatar d-flex align-items-center justify-content-center fs-18"
-              >
-                <i>{contact.icon}</i>
-              </a>
-            ) : (
-              <a href="#!" className="stretched-link">
-                {typeof contact.image === "string" ? (
-                  <img
-                    src={contact.image}
-                    className="me-2 rounded-circle"
-                    height="36"
-                    alt={`avatar-${contact.id}`}
-                  />
-                ) : (
-                  <img
-                    src={contact.image?.src}
-                    className="me-2 rounded-circle"
-                    height="36"
-                    alt={`avatar-${contact.id}`}
-                  />
-                )}
-              </a>
-            )}
-            <div className="flex-grow-1">
-              <h5 className="my-0 fs-14">{contact.name}</h5>
-              {contact.status && (
-                <p className="mt-1 mb-0 text-muted">
-                  <span className="w-75">{contact.status}</span>
-                </p>
+      <SimpleBar className="scrollbar">
+        <div className="px-3 mb-3 chat-setting-height" data-simplebar>
+          {contacts.map((contact, idx) => (
+            <div
+              key={contact.id}
+              className="d-flex align-items-center position-relative py-2"
+            >
+              {contact.icon ? (
+                <a
+                  href="#"
+                  className="me-2 stretched-link rounded-circle text-bg-primary avatar d-flex align-items-center justify-content-center fs-18"
+                >
+                  <i>{contact.icon}</i>
+                </a>
+              ) : (
+                <a href="#!" className="stretched-link">
+                  {typeof contact.image === "string" ? (
+                    <img
+                      src={contact.image}
+                      className="me-2 rounded-circle"
+                      height="36"
+                      alt={`avatar-${contact.id}`}
+                    />
+                  ) : (
+                    <img
+                      src={contact.image?.src}
+                      className="me-2 rounded-circle"
+                      height="36"
+                      alt={`avatar-${contact.id}`}
+                    />
+                  )}
+                </a>
               )}
+              <div className="flex-grow-1">
+                <h5 className="my-0 fs-14">{contact.name}</h5>
+                {contact.status && (
+                  <p className="mt-1 mb-0 text-muted">
+                    <span className="w-75">{contact.status}</span>
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </SimpleBar>
     </div>
   );
 };

@@ -88,9 +88,9 @@ const ChatSideBar = () => {
             spaceBetween={8}
             autoHeight={true}
           >
-          {avatars.map((src, index) => (
-            <SwiperSlide key={index} className="avatar-sm">
-              <div className="chat-user-status-box">
+            {avatars.map((src, index) => (
+              <SwiperSlide key={index} className="avatar-sm">
+                <div className="chat-user-status-box">
                   <span>
                     <img
                       src={src.src}
@@ -120,13 +120,10 @@ const ChatSideBar = () => {
             </li>
           ))}
         </ul>
-        {/* <div className="tab-content"> */}
-        <SimpleBar className="scrollbar tab-content">
-          {activeTab === "chat-list" && <ChatList />}
-          {activeTab === "group-list" && <GroupList />}
-          {activeTab === "contact-list" && <ContactList />}
-        </SimpleBar>
-        {/* </div> */}
+
+        {activeTab === "chat-list" && <ChatList />}
+        {activeTab === "group-list" && <GroupList />}
+        {activeTab === "contact-list" && <ContactList />}
       </div>
     </div>
   );

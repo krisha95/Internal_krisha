@@ -11,6 +11,7 @@ import avatar8 from "@/assets/images/users/avatar-8.jpg";
 import avatar9 from "@/assets/images/users/avatar-9.jpg";
 import avatar10 from "@/assets/images/users/avatar-10.jpg";
 import { BiCheckDouble } from "react-icons/bi";
+import SimpleBar from "simplebar-react";
 
 interface Chat {
   id: number;
@@ -100,53 +101,60 @@ const ChatList = () => {
 
   const [chats] = useState(chatData);
   return (
-    // <div className="show active" id="chat-list">
-    <div className="px-3 mb-3 chat-setting-height show active" id="chat-list">
-      <ListGroup>
-        {chats.map((chat) => (
-          <ListGroup.Item
-            key={chat.id}
-            action
-            className={`border-0 p-2 ${
-              chat.status === "typing" ? "bg-light bg-opacity-50 rounded-1" : ""
-            }`}
-          >
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0 position-relative">
-                <Image
-                  src={chat.avatar}
-                  alt={chat.name}
-                  width={36}
-                  height={36}
-                  className="rounded-circle me-2"
-                />
-              </div>
-              <div className="flex-grow-1 overflow-hidden">
-                <h5 className="my-0 d-flex justify-content-between">
-                  {chat.name}
-                  <span className="text-muted fs-13">{chat.time}</span>
-                </h5>
-                <p
-                  className={`mt-1 mb-0 fs-13 text-muted d-flex justify-content-between`}
-                >
-                  <span
-                    className={`w-75 ${
-                      chat.status === "typing" ? "text-primary" : ""
-                    }`}
-                  >
-                    {chat.message}
-                  </span>
-                  {chat.status === "read" && (
-                    <BiCheckDouble className="text-success" />
-                  )}
-                </p>
-              </div>
-            </div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+    <div className="show active" id="chat-list">
+      <SimpleBar className="scrollbar">
+        <div
+          className="px-3 mb-3 chat-setting-height show active"
+          id="chat-list"
+        >
+          <ListGroup>
+            {chats.map((chat) => (
+              <ListGroup.Item
+                key={chat.id}
+                action
+                className={`border-0 p-2 ${
+                  chat.status === "typing"
+                    ? "bg-light bg-opacity-50 rounded-1"
+                    : ""
+                }`}
+              >
+                <div className="d-flex align-items-center">
+                  <div className="flex-shrink-0 position-relative">
+                    <Image
+                      src={chat.avatar}
+                      alt={chat.name}
+                      width={36}
+                      height={36}
+                      className="rounded-circle me-2"
+                    />
+                  </div>
+                  <div className="flex-grow-1 overflow-hidden">
+                    <h5 className="my-0 d-flex justify-content-between">
+                      {chat.name}
+                      <span className="text-muted fs-13">{chat.time}</span>
+                    </h5>
+                    <p
+                      className={`mt-1 mb-0 fs-13 text-muted d-flex justify-content-between`}
+                    >
+                      <span
+                        className={`w-75 ${
+                          chat.status === "typing" ? "text-primary" : ""
+                        }`}
+                      >
+                        {chat.message}
+                      </span>
+                      {chat.status === "read" && (
+                        <BiCheckDouble className="text-success" />
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
+      </SimpleBar>
     </div>
-    // </div>
   );
 };
 
